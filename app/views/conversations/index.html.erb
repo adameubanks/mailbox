@@ -1,0 +1,52 @@
+<style>
+.glyphicon {
+  float: right;
+  margin-top: 2px;
+  margin-right: -6px;
+}
+</style>
+  <div class="list-group col-md-3">
+  <ul class="nav nav-pills nav-stacked">
+    <li><button type="button" class="list-group-item"
+    data-toggle="collapse" data-target="#mail"><h4>Conversations
+      <i class="glyphicon glyphicon-inbox"></i></h4></button></li>
+    <li><button type="button" class="list-group-item"
+    data-toggle="collapse" data-target="#new"><h4>New Message
+      <i class="glyphicon glyphicon-new-window" style="vertical-align:right;"></i></h4></button></li>
+  </ul>
+</div>
+<h1>My Inbox</h1>
+<div class="panel panel-default">
+<div class="col-lg-6">
+  <div id="mail" class="collapse">
+    <h1 class="panel-heading">All Conversations:</h1>
+    <div class="panel-body">
+     <div class="item">
+      <% @conversations.each do |conversation| %>
+      <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+       <% if conversation.sender_id == current_user.id %>
+         <% recipient = User.find(conversation.recipient_id) %>
+       <% else %>
+         <% recipient = User.find(conversation.sender_id) %>
+       <% end %>
+       <h3><%= link_to recipient.email, conversation_messages_path(conversation)%></h3>
+      <% end %>
+     <% end %>
+     </div>
+    </div>
+   </div>
+  <div id="new" class="collapse">
+    <div class="panel-body">
+     <h1 class="panel-heading">All Users:</h1>
+       <% @users.each do |user| %>
+        <% if user.id != current_user.id %>
+         <div class="item"><h3>
+      <%= link_to user.email,
+       conversations_path(sender_id: current_user.id, recipient_id: user.id), method: "post"%>
+     </h3></div>
+      <% end %>
+     <% end %>
+    </div>
+  </div>
+</div>
+</div>
