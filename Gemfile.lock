@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/king601/devise-bootstrapped.git
+  revision: 152ef108593758f4c93d0e303e9f2a545371fe43
+  specs:
+    devise-bootstrapped (0.1.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -161,6 +167,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise
+  devise-bootstrapped!
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.2.6)
